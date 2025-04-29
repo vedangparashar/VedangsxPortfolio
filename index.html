@@ -1,0 +1,782 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vedang Parashar | Cloud & Software Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #24292e; /* GitHub dark gray */
+      --secondary: #586069; /* GitHub medium gray */
+      --accent: #0366d6; /* GitHub blue */
+      --accent-light: #f6f8fa; /* GitHub light gray */
+      --border-color: #e1e4e8; /* GitHub border color */
+      --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --transition: all 0.2s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      color: var(--primary);
+      background-color: #fafbfc;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 296px 1fr;
+      gap: 32px;
+      min-height: 100vh;
+    }
+
+    /* Profile Sidebar - GitHub style */
+    .profile-sidebar {
+      position: sticky;
+      top: 32px;
+      align-self: start;
+    }
+
+    .profile-img-wrapper {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-text h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .profile-text p {
+      font-size: 1rem;
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+
+    .contact-info {
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .contact-info i {
+      width: 16px;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      color: var(--secondary);
+      border-radius: 50%;
+      font-size: 1rem;
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background-color: var(--accent-light);
+    }
+
+    .skills-highlight {
+      margin-top: 20px;
+    }
+
+    .skills-highlight h3 {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-badge {
+      background-color: var(--accent-light);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Main Content - GitHub style */
+    .main-content {
+      background-color: white;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      background-color: white;
+      padding: 0 16px;
+    }
+
+    .nav-tab {
+      padding: 16px 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+      margin-bottom: -1px;
+      transition: 0.2s linear all
+      
+    }
+
+    .nav-tab:hover {
+      transform:scale(1.05);
+      color: var(--primary);
+      background-color: #838d97;
+      color:white;
+      
+    }
+
+    .nav-tab.active {
+      color: var(--accent);
+      border-bottom-color: #fd8c73; /* GitHub orange */
+      font-weight: 600;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      padding: 24px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* About Section (default visible) */
+    #about {
+      display: block;
+      padding: 24px;
+    }
+
+    .about-text p {
+      margin-bottom: 16px;
+      color: var(--secondary);
+    }
+
+    .expertise-list {
+      list-style-position: inside;
+      margin-bottom: 16px;
+      color: var(--secondary);
+    }
+
+    .expertise-list li {
+      margin-bottom: 8px;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.project-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-thumbnail img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-info {
+  padding: 15px;
+}
+
+.project-tech {
+  margin-top: 10px;
+}
+
+.tech-tag {
+  display: inline-block;
+  background: #eee;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  margin: 2px;
+}
+
+.project-links {
+  margin-top: 15px;
+}
+
+.project-link {
+  text-decoration: none;
+  margin-right: 10px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-category {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+    }
+
+    .skill-category h4 {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-category i {
+      color: var(--accent);
+    }
+
+    .skill-items {
+      list-style-type: none;
+    }
+
+    .skill-items li {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .skill-items li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+    }
+
+    /* Contact Section */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-info p {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-form h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .submit-btn:hover {
+      background-color: #035fc7;
+    }
+
+    /* GitHub-like stats section */
+    .profile-stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.9rem;
+    }
+
+    .stat-number {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      color: var(--secondary);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 16px;
+      }
+
+      .profile-sidebar {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .profile-img-wrapper {
+        width: 120px;
+        height: 120px;
+      }
+
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 768px) {
+      .nav-tabs {
+        flex-wrap: wrap;
+      }
+
+      .nav-tab {
+        flex: 1;
+        text-align: center;
+        padding: 12px;
+        font-size: 0.8rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+.skill-category{
+  background-color: #bedbf9;
+  transition: 0.2s linear all;
+}
+.skill-category:hover{
+  
+transform: scale(1.05);
+background-color: rgb(195, 152, 152);
+color: #e1e4e8;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Profile Sidebar (Left) -->
+    <aside class="profile-sidebar">
+      <div class="profile-img-wrapper">
+        <img src="C:\Users\VEDAN\Desktop\500107839" alt="Vedang" class="profile-img">
+      </div>
+      <div class="profile-text">
+        <h1>Vedang Parashar</h1>
+        <p>Software Developer</p>
+      </div>
+      
+      <div class="contact-info">
+        <p><i class="fas fa-phone"></i> +91 8630717368</p>
+        <p><i class="fas fa-envelope"></i> vedangparashar@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Dehradun, Uttarakhand</p>
+      </div>
+      
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/vedang-parashar-58bb28282/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/vedangparashar" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      
+      <div class="skills-highlight">
+        <h3>Top Skills</h3>
+        <div class="skill-badges">
+          <span class="skill-badge">Java</span>
+          <span class="skill-badge">Python</span>
+          <span class="skill-badge">JavaScript</span>
+          <span class="skill-badge">Streamlit</span>
+          <span class="skill-badge">AWS</span>
+          <span class="skill-badge">Docker</span>
+        </div>
+      </div>
+
+      <!-- GitHub-like stats -->
+      
+    </aside>
+
+    <!-- Main Content (Right) -->
+    <main class="main-content">
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs">
+        <div class="nav-tab active" data-tab="about">Overview</div>
+        <div class="nav-tab" data-tab="projects">Projects</div>
+        <div class="nav-tab" data-tab="skills">Skills</div>
+        <div class="nav-tab" data-tab="contact">Contact</div>
+      </div>
+
+      <!-- About Section (default visible like GitHub overview) -->
+      <section id="about">
+        <div class="about-text">
+          <h2 class="section-title">About</h2>
+          <p>I am Vedang Parashar, a third-year B.Tech Computer Science and Engineering (CSE) student at CCVT. I am a hardworking, adaptable individual with strong leadership qualities and a deep passion for technology and problem-solving.</p>
+          
+          <p>I am constantly exploring new technologies and pushing my limits to build better and more efficient solutions. With a strong foundation in both frontend and backend development, cloud technologies, and containerization, I aim to create impactful, scalable systems.</p>
+          <p>I am passionate about learning and implementing real-world solutions using cutting-edge technologies. I thrive in dynamic environments where adaptability and leadership are key, and I am committed to continuously improving myself both technically and personally.</p>
+          
+          <h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 1.2rem;">Technical Proficiencies</h3>
+          <ul class="expertise-list">
+            <li>Proficient in cloud computing with AWS services like EC2, S3, IAM, and Lambda.</li>
+            <li>Backend development expertise with Node.js, Express.js, and REST API design.</li>
+            <li>Strong problem-solving skills with a focus on Data Structures and Algorithms in C++ and JavaScript.</li>
+            <li>Passionate about building scalable, efficient, and user-centric web applications.
+            </li>
+            <li>Familiar with version control and collaboration using Git and GitHub.</li>
+          </ul>
+        </div>
+      </section>
+<!-- Projects Tab Content -->
+<div class="tab-content" id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      
+      <!-- Multipage -->
+      <div class="project-card">
+        <div class="project-thumbnail">
+          <img src="https://i.ytimg.com/vi/_bdqfgLM5uo/maxresdefault.jpg" alt="!">
+        </div>
+        <div class="project-info">
+          <h3>Multipage Application </h3>
+          <p class="project-description">
+          
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Streamlit</span>
+            <span class="tech-tag">Scikit-learn</span>
+          </div>
+          <div class="project-links">
+            <a href="https://multipage-jz4qfwzg82bkrayjpwbbir.streamlit.app/" class="project-link live" target="_blank">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://github.com/vedangparashar/MULTIPAGE" class="project-link code" target="_blank">
+              <i class="fab fa-github"></i> View Code
+            </a>
+          </div>
+        </div>
+      </div>
+  <!-- Project 1 -->
+  <div class="project-card">
+    <div class="project-thumbnail">
+      <img src="data:image/png;base64,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" alt="DockStorm Project" width="300" height="200">
+    </div>
+    <div class="project-info">
+      <h3>DockStorm</h3>
+      <p class="project-description">
+        A collection of Docker experiments demonstrating proficiency in containerization and orchestration.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Docker</span>
+        <span class="tech-tag">Containerization</span>
+        <span class="tech-tag">DevOps</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/vedangparashar/Vedang" class="project-link code" target="_blank">
+          <i class="fab fa-github"></i> View Code
+        </a>
+      </div>
+    </div>
+  </div>
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-thumbnail">
+          <img src="https://www.weblineindia.com/wp-content/uploads/2019/06/AI-in-Healthcare.jpg" alt="!">
+        </div>
+        <div class="project-info">
+          <h3>AI-Based Medical Treatment Cost Prediction </h3>
+          <p class="project-description">
+            You can calculate the cost of Medical Treatement .
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Streamlit</span>
+            <span class="tech-tag">Scikit-learn</span>
+          </div>
+          <div class="project-links">
+            <a href="https://health-cost-prediction-mk9gkuygnnj8ylhzrs6qg4.streamlit.app/" class="project-link live" target="_blank">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://github.com/vedangparashar/Health-Cost-Prediction" class="project-link code" target="_blank">
+              <i class="fab fa-github"></i> View Code
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-thumbnail">
+          <img src="https://bakeryb.com/wp-content/uploads/2025/03/cakes-banner-2-scaled.jpg" alt="!">
+        </div>
+        <div class="project-info">
+          <h3>BAKERS</h3>
+          <p class="project-description">
+            
+          </p>
+          <div class="project-tech">
+            
+            <span class="tech-tag">Python</span>
+          </div>
+          <div class="project-links">
+            <a href="https://jiwjgpm3apcy57mebihrm3.streamlit.app/" class="project-link live" target="_blank">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://github.com/vedangparashar/-Baker-s-" class="project-link code" target="_blank">
+              <i class="fab fa-github"></i> View Code
+            </a>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+  
+   
+   <!-- Skills Tab Content -->
+   <div class="tab-content" id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h4><i class="fas fa-code"></i> Programming</h4>
+        <ul class="skill-items">
+          <li>Java</li>
+          <li>Python</li>
+          <li>JavaScript</li>
+          <li>C/C++</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h4><i class="fas fa-laptop-code"></i> Web Development</h4>
+        <ul class="skill-items">
+          <li>HTML/CSS</li>
+          <li>React</li>
+          <li>Node.js</li>
+          <li>Express</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h4><i class="fas fa-server"></i> Backend</h4>
+        <ul class="skill-items">
+          <li>Spring Boot</li>
+          <li>REST APIs</li>
+          <li>Microservices</li>
+          <li>GraphQL</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h4><i class="fas fa-database"></i> Databases</h4>
+        <ul class="skill-items">
+          <li>MySQL</li>
+          <li>PostgreSQL</li>
+          <li>MongoDB</li>
+          <li>Redis</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h4><i class="fab fa-aws"></i> Cloud & DevOps</h4>
+        <ul class="skill-items">
+          <li>AWS</li>
+          <li>Docker</li>
+          <li>Kubernetes</li>
+          <li>CI/CD</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h4><i class="fas fa-tools"></i> Tools</h4>
+        <ul class="skill-items">
+          <li>Git</li>
+          <li>VS Code</li>
+          <li>IntelliJ</li>
+          <li>Postman</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Tab Content -->
+  <div class="tab-content" id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <p>I am eager to connect and discuss potential opportunities. Feel free to reach out through the channels below.</p>
+
+        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/vedang-parashar-58bb28282/" target="_blank">LinkedIn</a></p>
+        <p><i class="fab fa-github"></i> <a href="https://github.com/vedangparashar" target="_blank">GitHub</a></p>
+      </div>
+      <div class="contact-form">
+        <h3>Send me a message</h3>
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<script>
+// Tab functionality
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    // Hide all tab contents and the about section
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+    document.getElementById('about').style.display = 'none';
+    
+    // Remove active class from all tabs
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    
+    // Add active class to clicked tab and show corresponding content
+    tab.classList.add('active');
+    const tabId = tab.getAttribute('data-tab');
+    if (tabId === 'about') {
+      document.getElementById('about').style.display = 'block';
+    } else {
+      document.getElementById(tabId).style.display = 'block';
+    }
+  });
+});
+
+// Simple form submission handler
+const contactForm = document.querySelector('.contact-form form');
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for your message! In a real implementation, this would send the form data to a server.');
+    contactForm.reset();
+  });
+}
+</script>
+</body>
+</html>
